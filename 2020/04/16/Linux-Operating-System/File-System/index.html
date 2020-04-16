@@ -6,21 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>File System  | JianShu Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="为什么需要文件系统？ 在Linux中一切皆文件，为方便存储，写文件，读取文件，查询文件需要对文件进行统一的规划，达到高效访问、输出、查询！  Linux读取写入文件的流程以及文件系统的功能​    构造一个文件系统必须满足其相应的需求，它主要有以下需求  文件以一定的存储格式存储到计算机中，方便计算机存储设备管理 文件存储必须要有相应的索引方便查询 文件系统应该有一个缓存区，协助快速读取 文件以文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/16/hello-world/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:title" content="File System ">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/Linux-Operating-System/File-System/index.html">
+<meta property="og:site_name" content="JianShu Blogs">
+<meta property="og:description" content="为什么需要文件系统？ 在Linux中一切皆文件，为方便存储，写文件，读取文件，查询文件需要对文件进行统一的规划，达到高效访问、输出、查询！  Linux读取写入文件的流程以及文件系统的功能​    构造一个文件系统必须满足其相应的需求，它主要有以下需求  文件以一定的存储格式存储到计算机中，方便计算机存储设备管理 文件存储必须要有相应的索引方便查询 文件系统应该有一个缓存区，协助快速读取 文件以文">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-16T01:31:06.484Z">
-<meta property="article:modified_time" content="2020-04-16T01:31:06.484Z">
-<meta property="article:author" content="John Doe">
+<meta property="og:image" content="http://yoursite.com/Images/Filesystem.png">
+<meta property="og:image" content="http://yoursite.com/Images/Ext3.jpeg">
+<meta property="og:image" content="http://yoursite.com/2020/04/16/Linux-Operating-System/File-System/Extents.jpeg">
+<meta property="og:image" content="http://yoursite.com/Images/File_storages_structure.jpeg">
+<meta property="og:image" content="http://yoursite.com/Images/MetaBlockGroup.jpeg">
+<meta property="article:published_time" content="2020-04-16T05:51:48.000Z">
+<meta property="article:modified_time" content="2020-04-16T14:42:42.937Z">
+<meta property="article:author" content="JianShu">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="File-System">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/Images/Filesystem.png">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="JianShu Blogs" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -47,11 +55,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/Images/Jianshu.jpg" class="js-avatar show">
 		</a>
-		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		<img src="/Images/Jianshu.jpg" class="js-avatar show" style="width: 100%;height: 100%;opacity: 1;">
+		  <h1 class="header-author"><a href="/">JianShu</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">Initiative Thinker</p>
 		
 
 		<nav class="header-menu">
@@ -60,6 +70,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+	        
+				<li><a href="/tags/Linux">Linux</a></li>
 	        
 			</ul>
 		</nav>
@@ -105,13 +117,17 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/Images/Jianshu.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">JianShu</h1>
 			</hgroup>
 			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Initiative Thinker<i class="icon icon-quo-right"></i></p>
 			
+			
+			
+				
 			
 				
 			
@@ -134,12 +150,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/Linux">Linux</a></li>
 		        
 				</ul>
 			</nav>
@@ -154,68 +172,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Linux-Operating-System/File-System" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      File System 
     </h1>
   
 
         
-        <a href="/2020/04/16/hello-world/" class="archive-article-date">
-  	<time datetime="2020-04-16T01:31:06.484Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+        <a href="/2020/04/16/Linux-Operating-System/File-System/" class="archive-article-date">
+  	<time datetime="2020-04-16T05:51:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h4 id="为什么需要文件系统？"><a href="#为什么需要文件系统？" class="headerlink" title="为什么需要文件系统？"></a>为什么需要文件系统？</h4><ul>
+<li>在Linux中一切皆文件，为方便存储，写文件，读取文件，查询文件需要对文件进行统一的规划，达到高效访问、输出、查询！</li>
+</ul>
+<h4 id="Linux读取写入文件的流程以及文件系统的功能"><a href="#Linux读取写入文件的流程以及文件系统的功能" class="headerlink" title="Linux读取写入文件的流程以及文件系统的功能"></a>Linux读取写入文件的流程以及文件系统的功能</h4><p>​    构造一个文件系统必须满足其相应的需求，它主要有以下需求</p>
+<ul>
+<li>文件以一定的存储格式存储到计算机中，方便计算机存储设备管理</li>
+<li>文件存储必须要有相应的索引方便查询</li>
+<li>文件系统应该有一个缓存区，协助快速读取</li>
+<li>文件以文件夹的格式进行分类管理–形成树结构</li>
+<li>文件系统需要维护一定的数据结构来记录该文件是否正在被进程使用或者打开</li>
+</ul>
+<p><img src="/Images/Filesystem.png" alt=""></p>
+<h4 id="文件在硬盘的格式–Ext系列"><a href="#文件在硬盘的格式–Ext系列" class="headerlink" title="文件在硬盘的格式–Ext系列"></a>文件在硬盘的格式–Ext系列</h4><ul>
+<li>Linux早期的文件格式Ext3，最核心的组件便是Inode ,每个Inode结构包含了一个文件的名字，权限以及其数据块的位置。我们可以通过i_block[0-11]直接访问数据块，若数据块较大，可以让数据块直接存放其他数据块的地址，进行间接访问。</li>
+</ul>
+<p><img src="/Images/Ext3.jpeg" alt=""></p>
+<p><strong>这样有一个明显的弊端是访问时间会变长，同时数据存储更加离散，容易产生较大的内存碎片</strong></p>
+<p>解决方法的直接思路是改变其基本单位的大小，iblocks不在存储一个个块(4k)去存储一个个Extents entry,每个入口即连续的块地址或者若文件太大可以继续采用树结构的方式，entry指向下一个节点！</p>
+<p><img src="Extents.jpeg" alt=""></p>
+<p>上面描述的则是在硬盘中存储的基本单元的格式，一个inode包含了一些数据块。对磁盘按照inode结构进行空间大小的划分。根据文件的大小进行分配多少数据块，以及inode节点。<strong>那么如何知道哪些inode没有使用/释放 ，那些块没有使用/释放呢？</strong></p>
+<p><strong>Inode 位图和 数据块位图可以极快查找那些inode和数据块未使用</strong>,类似于哈希表来！</p>
+<p>因此我们可以通过inode位图和block位图来创建文件，<strong>一个block位图+ 一个inode位图+ 数据块+ inode结构构成了一个块组</strong>，但实际上一个块组仅仅可以存储128M大小，因此是远远不够的，因此我们需要多个块组。那么就需要<strong>块组描述符</strong>来描述该文件用了那些块组,或者该块组属于那个文件，因此整个文件系统格式如下所示：</p>
+<p><img src="/Images/File_storages_structure.jpeg" alt=""></p>
+<p>超级块和块组描述符为该文件的全局变量，因此每个块都要存储，会浪费每个块的空间(128M)</p>
+<p>一个思路是将一个文件的多个块组进行组合，例如有一个文件由256个块组，256个块组分成4个元组，每个元组中的块组描述符号不用记录256项，只需记录元组中的64项。这样就可以减少每个块组中描述符所占的内存！！</p>
+<p><img src="/Images/MetaBlockGroup.jpeg" alt=""></p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">File-System</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -266,7 +291,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/16/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/16/Linux-Operating-System/File-System/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -278,6 +303,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/16/Linux-Operating-System/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux Operating System</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -291,6 +326,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要文件系统？"><span class="toc-number">1.</span> <span class="toc-text">为什么需要文件系统？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux读取写入文件的流程以及文件系统的功能"><span class="toc-number">2.</span> <span class="toc-text">Linux读取写入文件的流程以及文件系统的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件在硬盘的格式–Ext系列"><span class="toc-number">3.</span> <span class="toc-text">文件在硬盘的格式–Ext系列</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -315,7 +363,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2020 JianShu
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -396,6 +444,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">File-System</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -477,7 +533,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">现为一名研究生，主攻方向多声道音频编码，正在学习C/C++ 数据结构/算法/操作系统/计算机组成原理 个人博客会记录研究生阶段的学习情况</div>
   	  	
     	</section>
     
